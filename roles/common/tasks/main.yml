@@ -1,0 +1,12 @@
+---
+- name: Install relevant utilities
+  ansible.builtin.apt:
+    pkg:
+      - make
+      - cmake
+      - clang
+      - python3
+      - ssh
+      - python3-pip
+    state: present
+  become: true

@@ -1,0 +1,20 @@
+---
+- name: Update and upgrade with apt
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    upgrade: yes
+  become: true
+
+- name: Setup serial communication with CKermit
+  ansible.builtin.import_tasks:
+    file: ckermit.yml
+
+- name: Setup ssh connections for PlutoSDR
+  ansible.builtin.import_tasks:
+
+    file: ssh_setup.yml
+
+- name: Setup IIO for python development
+  ansible.builtin.import_tasks:
+    file: iio.yml

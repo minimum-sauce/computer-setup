@@ -1,0 +1,15 @@
+---
+- name: Install libiio
+  ansible.builtin.apt:
+    pkg: libiio-utils
+    state: present
+  become: true
+
+- name: Install python libraries pylibiio and pyadi-iio
+  ansible.builtin.pip:
+    name:
+      - pylibiio
+      - pyadi-iio
+    
+
+

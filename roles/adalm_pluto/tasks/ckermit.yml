@@ -1,0 +1,7 @@
+---
+# NOTE: this only works for Ubuntu:22:04+ from what I know
+- name: install ckermit for serial communication
+  ansible.builtin.apt:
+    pkg: ckermit
+    state: present
+  become: true

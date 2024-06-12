@@ -1,0 +1,44 @@
+---
+- name: Update and upgrade apt
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    upgrade: yes
+  become: true
+
+- name: Install docker prerequisites
+  ansible.builtin.apt:
+    pkg:
+      - "curl"
+      - "ca-certificates"
+    state: present
+  become: true
+
+- name: Setup keyrings for docker
+  ansible.builtin.shell: | 
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+    
+    echo \ 
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    
+    sudo apt-get update
+  args:
+    executable: /bin/bash
+  delegate_to: localhost
+  become: true
+
+- name: Install docker
+  ansible.builtin.apt:
+    pkg:
+      - "docker-ce"
+      - "docker-ce-cli"
+      - "containerd.io"
+      - "docker-buildx-plugin"
+      - "docker-compose-plugin"
+    state: present
+  become: true
+  

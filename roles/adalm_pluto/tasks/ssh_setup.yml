@@ -1,0 +1,3 @@
+---
+- name: Install the config file that describes the PlutoSDR USB device
+  ansible.builtin.command: wget https://raw.githubusercontent.com/analogdevicesinc/plutosdr_scripts/master/ssh_config -O ~/.ssh/config
