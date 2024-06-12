@@ -8,5 +8,6 @@
       - python3
       - ssh
       - python3-pip
+      - fuse
     state: present
   become: true

@@ -1,2 +1,45 @@
 ---
-# tasks file for neovim
+
+- name: Check if neovim exists
+  ansible.builtin.stat:
+    path: "{{ nvim_executable_dest_path }}"
+  register: neovim_executable
+
+- name: install neovim appimage
+  ansible.builtin.get_url:
+    url: "{{ nvim_appimage_download_link }}"
+    dest: "{{ role_path }}/files/nvim.appimage"
+    #   checksum: "{{ nvim_appimage_checksum }}"
+  when: not neovim_executable.stat.exists
+
+
+- name: Move neovim to correct folder 
+  ansible.builtin.copy:
+    dest: "{{ nvim_executable_dest_path }}"
+    src: nvim.appimage
+  when: not neovim_executable.stat.exists
+  become: true
+
+- name: make neovim appimage executable
+  ansible.builtin.file:
+    dest: "{{ nvim_executable_dest_path }}"   
+    mode: a+x
+  when: not neovim_executable.stat.exists
+  become: true
+
+- name: Make sure .config/ exists
+  ansible.builtin.file:
+    name: "~/.config/"
+    state: directory
+
+- name: check if config file for neovim already exists
+  ansible.builtin.stat: 
+    path: "{{ nvim_config_dest_path }}"
+  register: neovim_config
+
+- name: Add config file for neovim
+  ansible.builtin.copy: 
+    src: nvim
+    dest: "{{ nvim_config_dest_path }}/nvim"
+  when: not neovim_config.stat.exists
+  
