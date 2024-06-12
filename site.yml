@@ -3,3 +3,7 @@
   roles:
     - docker
     - adalm_pluto
+    - accustic_warfare
+    - neovim
+    - tmux
+

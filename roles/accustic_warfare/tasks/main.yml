@@ -1,2 +1,20 @@
 ---
-# tasks file for accustic_warfare
+- name: Generate working directory root
+  ansible.builtin.file:
+    path: "{{ workplace_base_directory }}"
+    state: directory
+
+- name: Add FPGA-sampling repo to working directory
+  ansible.builtin.git:
+    repo: "{{FPGA_sample_git_repo }}"
+    dest: "{{ workplace_base_directory }}/FPGA-sample"
+    clone: true
+    update: no
+
+- name: Add zybo-rt-sampler repo to working directory
+  ansible.builtin.git:
+    repo: "{{ zybo_rt_sampler_git_repo }}"
+    dest: "{{ workplace_base_directory }}/zybo-rt-sampler"
+    clone: true
+    update: no
+
