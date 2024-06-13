@@ -5,10 +5,16 @@
     dest: "{{ bashrc_dest_path }}"
     state: link
 
-- name: setup bashrc file
+- name: setup bash profile file 
   ansible.builtin.file:
     src: "{{ role_path }}/files/profile"
     dest: "{{ profile_dest_path }}"
+    state: link
+
+- name: setup bash profile file 
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/bash_git"
+    dest: "~/.bash_git"
     state: link
 
 - name: setup other bash config files
