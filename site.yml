@@ -7,5 +7,5 @@
     - neovim
     - tmux
     - bash
-      #C    - iio_oscilloscope
+    - iio_oscilloscope
 
