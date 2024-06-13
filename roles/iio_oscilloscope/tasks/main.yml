@@ -1,0 +1,55 @@
+---
+
+- name: Install dependencies
+  ansible.builtin.apt:
+    pkg:
+      - libglib2.0-dev 
+      - libgtk-3-dev 
+      - libgtkdatabox-dev 
+      - libmatio-dev 
+      - libfftw3-dev 
+      - libxml2 
+      - libxml2-dev 
+      - bison 
+      - flex 
+      - libavahi-common-dev 
+      - libavahi-client-dev 
+      - libcurl4-openssl-dev 
+      - libjansson-dev 
+      - cmake 
+      - libaio-dev 
+      - libserialport-dev
+    state: present
+  become: true
+
+- name: check if IIO_Oscilloscope is installed
+  ansible.builtin.stat:
+    path: "{{ iio_osc_executable_path }}"
+  register: iio_osc_executable
+
+
+- name: retreive IIO-Oscilloscope github repo
+  ansible.builtin.git:
+    repo: "{{ iio_osc_git_repo }}"
+    dest: "{{ iio_osc_git_dest_path }}"
+    update: no
+    clone: true
+
+
+- name: Setup build directory
+  ansible.builtin.file:
+    path: "{{ iio_osc_git_dest_path }}/build"
+    state: directory
+
+- name: Build IIO-Oscilloscope
+  ansible.builtin.shell: 
+    chdir: "{{ iio_osc_git_dest_path|quote }}/build"
+    cmd: cmake ../ && make -j $(nproc)
+  register: build_result
+
+- name: Install IIO-Oscilloscope
+  ansible.builtin.command: 
+    cmd: sudo make install
+    chdir: "{{ iio_osc_git_dest_path }}/build"
+  become: true
+  

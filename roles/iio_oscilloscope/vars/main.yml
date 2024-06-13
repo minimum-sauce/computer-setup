@@ -1,0 +1,4 @@
+---
+iio_osc_git_repo: https://github.com/analogdevicesinc/iio-oscilloscope.git
+iio_osc_git_dest_path: ~/Downloads/iio_osc
+

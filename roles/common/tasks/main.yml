@@ -9,5 +9,6 @@
       - ssh
       - python3-pip
       - fuse
+      - sshpass
     state: present
   become: true

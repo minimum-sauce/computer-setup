@@ -1,3 +1,9 @@
 ---
+- name: Check for existing ssh config file
+  ansible.builtin.stat:
+    path: ~/.ssh/config
+  register: ssh_config_file
+
 - name: Install the config file that describes the PlutoSDR USB device
   ansible.builtin.command: wget https://raw.githubusercontent.com/analogdevicesinc/plutosdr_scripts/master/ssh_config -O ~/.ssh/config
+  when: not ssh_config_file.stat.exists
