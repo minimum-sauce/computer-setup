@@ -1,18 +1,21 @@
 ---
 - name: setup bashrc file
   ansible.builtin.file:
-    src: bashrc
+    src: "{{ role_path }}/files/bashrc"
     dest: "{{ bashrc_dest_path }}"
     state: link
 
 - name: setup bashrc file
   ansible.builtin.file:
-    src: profile
+    src: "{{ role_path }}/files/profile"
     dest: "{{ profile_dest_path }}"
     state: link
 
 - name: setup other bash config files
   ansible.builtin.file:
-    src: bash_conf
+    src: "{{ role_path }}/files/bash_conf"
     dest: "{{ other_config_dest_path }}"
     state: link
+
+- name: source the new bash config
+  ansible.builtin.command: source {{ bashrc_dest_path|quote }}

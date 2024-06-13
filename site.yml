@@ -6,5 +6,6 @@
     - accustic_warfare
     - neovim
     - tmux
-    - iio_oscilloscope
+    - bash
+      #C    - iio_oscilloscope
 
