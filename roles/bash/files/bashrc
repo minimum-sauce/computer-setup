@@ -1,0 +1,38 @@
+#http://stackoverflow.com/questions/12870928/mac-bash-git-ps1-command-not-found
+# curl -o ~/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+source ~/.bash_git
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+[[ $DISPLAY ]] && shopt -s checkwinsize
+
+PS1='\n\[\e[1;37m\]|-- \[\e[1;32m\]\u\[\e[0;39m\]@\[\e[1;36m\]\h\[\e[0;39m\]:\[\e[1;33m\]\w\[\e[0;39m\]\[\e[1;35m\]$(__git_ps1 " (%s)")\[\e[0;39m\] \[\e[1;37m\]--|\[\e[0;39m\]\n$ '
+
+case ${TERM} in
+xterm* | rxvt* | Eterm | aterm | kterm | gnome*)
+	PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
+	;;
+screen*)
+	PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033_%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
+	;;
+esac
+
+[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+
+if [ -f ~/.bash_aliases ]; then
+	. ~/.bash_aliases
+fi
+
+#defaults write NSGlobalDomain KeyRepeat -int 0
+
+# alias luamake=/home/felix/Downloads/lua-language-server/3rd/luamake/luamake
+
+if [ -f /home/felix/.bash_conf/aliases ]; then
+	. /home/felix/.bash_conf/aliases
+fi
+
+PATH="$PATH:/opt/nvim/bin/:/opt/avr8-gnu-toolchain-linux_x86_64/bin/:"
+
+#[ -f "/home/felix/.ghcup/env" ] && source "/home/felix/.ghcup/env" # ghcup-env
+#. "$HOME/.cargo/env"
