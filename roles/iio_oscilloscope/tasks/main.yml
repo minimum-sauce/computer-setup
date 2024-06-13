@@ -22,18 +22,18 @@
     state: present
   become: true
 
-- name: check if IIO_Oscilloscope is installed
-  ansible.builtin.stat:
-    path: "{{ iio_osc_executable_path }}"
-  register: iio_osc_executable
+#- name: check if IIO_Oscilloscope is installed
+#  ansible.builtin.stat:
+#    path: "{{ iio_osc_executable_path }}"
+#  register: iio_osc_executable
 
 
 - name: retreive IIO-Oscilloscope github repo
   ansible.builtin.git:
     repo: "{{ iio_osc_git_repo }}"
     dest: "{{ iio_osc_git_dest_path }}"
-    update: no
     clone: true
+    update: no
 
 
 - name: Setup build directory

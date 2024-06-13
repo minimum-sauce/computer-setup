@@ -1,10 +1,9 @@
-
 # Setup and installation guide
 
 ## Preparations
 we first install some dependencies
 ```shell
-sudo apt-get install git python3 python3-venv pipx
+sudo apt-get install git python3 python3-venv pipx make
 ```
 Now we can install ansible with the following instructions
 ```shell
