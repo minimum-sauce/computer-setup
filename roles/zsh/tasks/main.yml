@@ -1,0 +1,34 @@
+---
+
+- name: Update and upgrade with apt
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    upgrade: yes
+  become: true
+
+- name: install zsh shell
+  ansible.builtin.apt:
+    pkg: zsh
+    state: present
+  become: true
+
+- name: set zsh to standard shell
+  ansible.builtin.command: chsh -s $(which zsh)
+  
+  become_method
+  become_user: 
+
+
+- name: Setup zshrc
+  ansible.builtin.import_tasks:
+    file: zshrc.yml
+
+- name: Setup Oh-my-zsh 
+  ansible.builtin.import_tasks:
+    file: oh_my_zsh.yml
+
+- name: Setup rest of the config
+    
+
+
