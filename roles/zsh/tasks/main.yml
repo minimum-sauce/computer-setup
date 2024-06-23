@@ -14,21 +14,25 @@
   become: true
 
 - name: set zsh to standard shell
-  ansible.builtin.command: chsh -s $(which zsh)
+  ansible.builtin.command: "sudo chsh -s /usr/bin/zsh" #$(which zsh)"
+  become: true
+  become_user: "{{ ansible_user_id }}"
+  become_method: sudo
+
+- name: Make sure config file for zsh exists
+  ansible.builtin.file:
+    path: "$HOME/.config/zsh/"
+    state: directory
+
+- name: Setup oh-my-zsh
+  ansible.builtin.import_tasks:
+    file: oh_my_zsh.yml
   
-  become_method
-  become_user: 
-
-
-- name: Setup zshrc
+- name: Setup .zshrc
   ansible.builtin.import_tasks:
     file: zshrc.yml
 
-- name: Setup Oh-my-zsh 
+- name: Setup custom folder for zsh
   ansible.builtin.import_tasks:
-    file: oh_my_zsh.yml
-
-- name: Setup rest of the config
-    
-
+    file: custom.yml
 

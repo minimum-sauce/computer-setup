@@ -1,2 +1,4 @@
 ---
-# vars file for zsh-terminal
+zshrc_path: "$HOME/.zshrc"
+oh_my_zsh_path: "$HOME/.config/zsh/oh-my-zsh/"
+custom_path: "$HOME/.config/zsh/cutom/"

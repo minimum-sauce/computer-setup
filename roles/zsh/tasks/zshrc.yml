@@ -1,0 +1,10 @@
+- name: Remove .zshrc file if it exists
+  ansible.builtin.file:
+    name: "{{ zshrc_path }}"
+    state: absent
+
+- name: Make symbolic link sy zshrc file to home-directory
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/zshrc"
+    dest: "{{ zshrc_path }}"
+    state: link
