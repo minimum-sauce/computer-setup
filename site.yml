@@ -1,11 +1,34 @@
 ---
 - hosts: localhost
   roles:
-    - docker
-    - adalm_pluto
-    - accustic_warfare
-    - neovim
-    - tmux
-    - bash
-    - iio_oscilloscope
+    - role: common
+      tags: common
+
+    - role: zsh
+      tags: zsh
+
+    - role: bash 
+      tags: bash
+
+    - role: tmux
+      tags: tmux
+
+    - role: docker
+      tags: docker
+
+
+    - role: adalm_pluto
+      tags:
+        - RF
+        - accustic-warfare
+    - role: iio_oscilloscope
+      tags:
+        - RF
+        - accustic-warfare
+    - role: accustic_warfare
+      tags: accustic-warfare
+
+    - role: neovim
+      tags: 
+        - nvim
 

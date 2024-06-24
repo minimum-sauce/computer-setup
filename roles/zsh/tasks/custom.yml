@@ -1,0 +1,11 @@
+- name: check if custom/ dir exists
+  ansible.builtin.stat:
+    path: "{{ oh_my_zsh_path }}"
+  register: custom
+
+- name: Make symbolic link for custom directory
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/custom"
+    dest: "{{ custom_path }}"
+    state: link
+  when: custom.stat.exists is false
