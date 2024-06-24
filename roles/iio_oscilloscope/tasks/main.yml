@@ -22,6 +22,12 @@
     state: present
   become: true
 
+- name: Install libiio 
+  ansible.builtin.apt:
+    pkg: libiio-dev
+    state: present
+  become: true
+
 #- name: check if IIO_Oscilloscope is installed
 #  ansible.builtin.stat:
 #    path: "{{ iio_osc_executable_path }}"
@@ -43,7 +49,7 @@
 
 - name: Build IIO-Oscilloscope
   ansible.builtin.shell: 
-    chdir: "{{ iio_osc_git_dest_path|quote }}/build"
+    chdir: "{{ iio_osc_git_dest_path }}/build"
     cmd: cmake ../ && make -j $(nproc)
   register: build_result
 
@@ -52,4 +58,6 @@
     cmd: sudo make install
     chdir: "{{ iio_osc_git_dest_path }}/build"
   become: true
+  become_user: "{{ running_user }}"
+  become_method: sudo
   
