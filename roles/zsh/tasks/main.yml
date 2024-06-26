@@ -13,8 +13,9 @@
     state: present
   become: true
 
+
 - name: set zsh to standard shell
-  ansible.builtin.command: "sudo chsh -s /usr/bin/zsh" #$(which zsh)"
+  ansible.builtin.shell: "sudo chsh -s $(which zsh) $USER"
   become: true
   become_user: "{{ ansible_user_id }}"
   become_method: sudo

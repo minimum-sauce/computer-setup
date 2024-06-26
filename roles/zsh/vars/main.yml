@@ -1,4 +1,4 @@
 ---
 zshrc_path: "$HOME/.zshrc"
-oh_my_zsh_path: "$HOME/.config/zsh/oh-my-zsh/"
-custom_path: "$HOME/.config/zsh/cutom/"
+oh_my_zsh_path: "$HOME/.config/zsh/oh-my-zsh"
+custom_path: "$HOME/.config/zsh/custom"

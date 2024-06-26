@@ -5,6 +5,7 @@ export MANPATH="/usr/local/man:$MANPATH"
 # If you come from bash you might have to change your $PATH.
 export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH"
 export PATH="$HOME/.local/pipx/venvs/ansible/bin:$PATH"
+export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python3/dist-packages/:/usr/local/lib/python3.10/site-packages/:/usr/local/lib/python3.10/dist-packages/:/usr/lib/python3/dist-packages/:$HOME/.local/lib/python3.10/site-packages/:"
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.config/zsh/oh-my-zsh"
@@ -77,3 +78,7 @@ export ARCHFLAGS="-arch x86_64"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(git)
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

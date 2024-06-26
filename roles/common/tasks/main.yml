@@ -12,3 +12,7 @@
       - sshpass
     state: present
   become: true
+
+- name: current user 
+  ansible.builtin.debug:
+    msg: "user is: {{ansible_user_id}}"
