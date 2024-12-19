@@ -1,0 +1,118 @@
+---
+
+- name: Update and upgrade with apt
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    upgrade: yes
+  become: true
+
+# ------------------------------------------------------------------ #
+# Install dependencies
+# ------------------------------------------------------------------ #
+
+- name: install SwayWM meson dependency
+  ansible.builtin.shell: pip3 install meson>=0.55.3
+  become: true
+
+- name: Install SwayWM dependencies
+  ansible.builtin.apt:
+    pkg:
+      - wayland-protocols 
+      - libwayland-dev 
+      - libegl1-mesa-dev 
+      - libgles2-mesa-dev
+      - libdrm-dev 
+      - libgbm-dev
+      - libinput-dev
+      - libxkbcommon-dev
+      - libgudev-1.0-dev
+      - libpixman-1-dev
+      - libsystemd-dev
+      - cmake
+      - libpng-dev
+      - libavutil-dev
+      - libavcodec-dev
+      - libavformat-dev
+      - ninja-build
+      - libxcb-composite0-dev
+      - libxcb-icccm4-dev
+      - libxcb-image0-dev
+      - libxcb-render0-dev
+      - libxcb-xfixes0-dev
+      - libxkbcommon-dev
+      - libxcb-xinput-dev
+      - libx11-xcb-dev
+      - libjson-c-dev
+      - libpango1.0-dev
+      - libcairo2-dev
+      - libgdk-pixbuf2.0-dev
+      - libseat-dev
+      - scdoc
+      - dmenu
+      - swaybg
+      - swayidle
+      - swaylock
+  become: true
+
+# ------------------------------------------------------------------ #
+# Install wlroots
+# ------------------------------------------------------------------ #
+
+- name: Clone repo
+  ansible.builtin.git:
+    repo: "{{ wlroots_git_repo }}"
+    dest: "{{ wlroots_build_dest_path }}"
+    clone: true
+    version: 0.17.0
+    update: yes
+
+- name: setup wlroots build repo
+  ansible.builtin.shell: 
+    cmd: "meson build/"
+    chdir: "{{wlroots_build_dest_path}}"
+
+- name: Build wlroots
+  ansible.builtin.shell: 
+    cmd: "ninja -C build"
+    chdir: "{{wlroots_build_dest_path}}"
+
+- name: Install wlroots
+  ansible.builtin.shell:
+    cmd: "sudo ninja -C build install"
+    chdir: "{{wlroots_build_dest_path}}"
+  become: true
+  become_user: "{{ansible_user_id}}"
+  become_method: sudo
+
+# ------------------------------------------------------------------ #
+# Install sway
+# ------------------------------------------------------------------ #
+- name: Clone repo
+  ansible.builtin.git:
+    repo: "{{ sway_git_repo }}"
+    dest: "{{ sway_build_dest_path }}"
+    clone: true
+    version: 1.9
+    update: no
+
+- name: setup sway build repo
+  ansible.builtin.shell: 
+    cmd: "meson build/"
+    chdir: "{{sway_build_dest_path}}"
+
+- name: Build sway
+  ansible.builtin.shell: 
+    cmd: "ninja -C build/"
+    chdir: "{{sway_build_dest_path}}"
+
+- name: Install sway
+  ansible.builtin.shell:
+    cmd: "sudo ninja -C build/ install"
+    chdir: "{{sway_build_dest_path}}"
+  become: true
+  become_user: "{{ansible_user_id}}"
+  become_method: sudo
+  
+  
+  

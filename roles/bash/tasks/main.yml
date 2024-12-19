@@ -1,21 +1,52 @@
 ---
+
+- name: set bash to standard shell
+  ansible.builtin.shell: "sudo chsh -s $(which bash) $USER"
+  become: true
+  become_user: "{{ ansible_user_id }}"
+  become_method: sudo
+
+# ------------------------------------------------------- #
+# Setup bashrc
+# ------------------------------------------------------- #
 - name: setup bashrc file
-  ansible.builtin.copy:
+  ansible.builtin.file:
     src: "{{ role_path }}/files/bashrc"
     dest: "{{ bashrc_dest_path }}"
+    state: link
+    force: yes
 
+# ------------------------------------------------------- #
+# Setup bash_profile
+# ------------------------------------------------------- #
 - name: setup bash profile file 
-  ansible.builtin.copy:
+  ansible.builtin.file:
     src: "{{ role_path }}/files/profile"
     dest: "{{ profile_dest_path }}"
+    state: link
+    force: yes
 
-- name: setup bash profile file 
-  ansible.builtin.copy:
-    src: "{{ role_path }}/files/bash_git"
-    dest: "~/.bash_git"
 
-- name: setup other bash config files
+# ------------------------------------------------------- #
+# Setup bash config directory
+# ------------------------------------------------------- #
+#
+- name: check if config directory exists
+  ansible.builtin.stat:
+    path: "{{ bash_config_path }}"
+  register: bash_config
+    
+- name: Remove non-link bash config directory
+  ansible.builtin.file:
+    path: "{{ bash_config_path }}"
+    state: absent
+  when: not (bash_config.stat.islnk is defined and bash_config.stat.islnk)
+
+- name: setup bash config directory
   ansible.builtin.copy:
-    src: "{{ role_path }}/files/bash_conf"
-    dest: "{{ other_config_dest_path }}"
+    src: "{{ role_path }}/files/config"
+    dest: "{{ bash_config_path }}"
+    state: link
+    force: yes
+  when: not (bash_config.stat.islnk is defined and bash_config.stat.islnk)
 

@@ -1,4 +1,4 @@
 ---
-bashrc_dest_path: ~/.bashrc
-profile_dest_path: ~/.profile
-other_config_dest_path: ~/.bash_conf
+bashrc_dest_path: "~/.bashrc"
+profile_dest_path: "~/.profile"
+bash_config_path: "~/.config/bash"

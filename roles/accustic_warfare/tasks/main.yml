@@ -18,3 +18,9 @@
     clone: true
     update: no
 
+- name: Add WARA-PS client repo to working directory
+  ansible.builtin.git:
+    repo: "{{ waraps_clients_git_repo }}"
+    dest: "{{ workplace_base_directory }}/waraps_cli"
+    clone: true
+    update: no

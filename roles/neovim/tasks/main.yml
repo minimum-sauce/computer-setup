@@ -1,5 +1,16 @@
 ---
 
+- name: Update and upgrade with apt
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    upgrade: yes
+  become: true
+
+# ------------------------------------------------------------------ #
+# Setup executable
+# ------------------------------------------------------------------ #
+
 - name: Check if neovim exists
   ansible.builtin.stat:
     path: "{{ nvim_executable_dest_path }}"
@@ -9,7 +20,6 @@
   ansible.builtin.get_url:
     url: "{{ nvim_appimage_download_link }}"
     dest: "{{ role_path }}/files/nvim.appimage"
-    #   checksum: "{{ nvim_appimage_checksum }}"
   when: not neovim_executable.stat.exists
 
 
@@ -27,6 +37,12 @@
   when: not neovim_executable.stat.exists
   become: true
 
+
+
+# ------------------------------------------------------------------ #
+# Setup config
+# ------------------------------------------------------------------ #
+
 - name: Make sure .config/ exists
   ansible.builtin.file:
     name: "~/.config/"
@@ -37,9 +53,17 @@
     path: "{{ nvim_config_dest_path }}"
   register: neovim_config
 
+- name: Remove config if not symbolic link
+  ansible.builtin.file:
+    path: "{{ nvim_config_dest_path }}"
+    state: absent
+  when: not (neovim_config.stat.islnk is defined and neovim_config.stat.islnk)
+
 - name: Add config file for neovim
-  ansible.builtin.copy: 
-    src: nvim
-    dest: "{{ nvim_config_dest_path }}/nvim"
-  when: not neovim_config.stat.exists
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/nvim"
+    dest: "{{ nvim_config_dest_path }}"
+    state: link
+    force: yes
+  when: not (neovim_config.stat.islnk is defined and neovim_config.stat.islnk)
   

@@ -1,0 +1,7 @@
+---
+sway_git_repo: "https://github.com/swaywm/sway.git"
+sway_build_dest_path: "/home/{{ansible_user_id}}/Downloads/swayWM"
+sway_config_dest_path: "~/.config/sway/"
+wlroots_git_repo: "https://gitlab.freedesktop.org/wlroots/wlroots.git"
+wlroots_build_dest_path: "/home/{{ansible_user_id}}/Downloads/wlroots"
+

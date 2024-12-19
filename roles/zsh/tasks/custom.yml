@@ -5,7 +5,14 @@
 
 - name: Make symbolic link for custom directory
   ansible.builtin.file:
+    dest: "{{ custom_path }}"
+    state: absent
+  when: not (custom.stat.islnk is defined and custom.stat.islnk)
+
+- name: Make symbolic link for custom directory
+  ansible.builtin.file:
     src: "{{ role_path }}/files/custom"
     dest: "{{ custom_path }}"
     state: link
-  when: custom.stat.exists is false
+    force: yes
+  when: not (custom.stat.islnk is defined and custom.stat.islnk)

@@ -1,2 +1,5 @@
 ---
-# vars file for accustic_warfare
+workplace_base_directory: ~/Documents/accustic_warfare
+FPGA_sample_git_repo: "git@github.com:acoustic-warfare/FPGA-sampling.git"
+zybo_rt_sampler_git_repo: "git@github.com:acoustic-warfare/zybo-rt-sampler.git"
+waraps_cli_git_repo: "git@github.com:acoustic-warfare/WARA-PS-MQTT-Agent.git"

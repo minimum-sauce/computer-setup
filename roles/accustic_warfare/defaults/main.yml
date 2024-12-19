@@ -1,5 +1,1 @@
 ---
-workplace_base_directory: ~/Documents/accustic_warfare
-FPGA_sample_git_repo: https://github.com/acoustic-warfare/FPGA-sampling.git
-zybo_rt_sampler_git_repo: https://github.com/acoustic-warfare/zybo-rt-sampler.git
-# defaults file for accustic_warfare

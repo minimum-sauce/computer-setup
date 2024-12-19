@@ -29,6 +29,8 @@
       tags: accustic-warfare
 
     - role: neovim
-      tags: 
-        - nvim
+      tags: neovim
+
+    - role: swayWM
+      tags: sway
 

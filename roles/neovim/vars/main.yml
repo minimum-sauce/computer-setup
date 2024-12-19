@@ -1,5 +1,5 @@
 ---
-nvim_config_dest_path: ~/.config/nvim/
+nvim_config_dest_path: "~/.config/nvim"
 nvim_executable_dest_path: /usr/local/bin/nvim
 nvim_appimage_download_link: https://github.com/neovim/neovim-releases/releases/download/v0.10.0/nvim.appimage
 nvim_appimage_checksum: "sha256:e80aa7b85a835b854393ecbf0ef0bba597ea1947f271ffd042d73d1b845e6510"

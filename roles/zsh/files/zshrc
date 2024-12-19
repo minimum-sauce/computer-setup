@@ -1,10 +1,14 @@
 # User configuration
+
+# Scripts
+export PATH="$HOME/scripts/:$PATH"
+
 # Man path
 export MANPATH="/usr/local/man:$MANPATH"
 
 # If you come from bash you might have to change your $PATH.
 export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH"
-export PATH="$HOME/.local/pipx/venvs/ansible/bin:$PATH"
+export PATH="$HOME/.local/pipx/venvs/ansible/bin:$HOME/.local/share/zig-linux-x86_64-0.12.0/:$PATH"
 export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python3/dist-packages/:/usr/local/lib/python3.10/site-packages/:/usr/local/lib/python3.10/dist-packages/:/usr/lib/python3/dist-packages/:$HOME/.local/lib/python3.10/site-packages/:"
 
 # Path to your Oh My Zsh installation.
