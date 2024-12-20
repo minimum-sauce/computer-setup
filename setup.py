@@ -111,6 +111,15 @@ answer = str.lower(input(prompt))
 if (answer == "y" or answer == "yes"):
     tags.append("accustic-warfare")
 
+# ------------------------------------------------- #
+# Setting up SwayWM                                 #
+# ------------------------------------------------- #
+
+prompt = "Would you like to setup Sway tiling window manager [y/N]?"
+answer = str.lower(input(prompt))
+
+if (answer == "y" or answer == "yes"):
+    tags.append("sway")
 
 # ------------------------------------------------- #
 # Run ansible with setup                            #

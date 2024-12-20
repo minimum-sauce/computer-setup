@@ -53,6 +53,12 @@
     path: "{{ nvim_config_dest_path }}"
   register: neovim_config
 
+- name: print out information
+  ansible.builtin.debug:
+    var: neovim_config
+    verbosity: 0
+
+
 - name: Remove config if not symbolic link
   ansible.builtin.file:
     path: "{{ nvim_config_dest_path }}"

@@ -11,13 +11,19 @@
 # Install dependencies
 # ------------------------------------------------------------------ #
 
-- name: install SwayWM meson dependency
-  ansible.builtin.shell: pip3 install meson>=0.55.3
-  become: true
-
 - name: Install SwayWM dependencies
   ansible.builtin.apt:
     pkg:
+      # - meson
+      # - wayland-protocols
+      # - pcre2-utils
+      # - libjson-c-dev
+      # - pango1.0-tools
+      # - cairo
+      # - gdk-pixbuf2 # (optional for additional image formats)
+      # - swaybg # (optional: wallpaper)
+      # - scdoc # (optional: man pages)
+      - meson
       - wayland-protocols 
       - libwayland-dev 
       - libegl1-mesa-dev 
@@ -37,7 +43,7 @@
       - ninja-build
       - libxcb-composite0-dev
       - libxcb-icccm4-dev
-      - libxcb-image0-dev
+      #- libxb-image0-dev
       - libxcb-render0-dev
       - libxcb-xfixes0-dev
       - libxkbcommon-dev
@@ -93,7 +99,7 @@
     repo: "{{ sway_git_repo }}"
     dest: "{{ sway_build_dest_path }}"
     clone: true
-    version: 1.9
+    version: v1.9
     update: no
 
 - name: setup sway build repo
