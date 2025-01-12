@@ -11,4 +11,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+local optional_group = vim.api.nvim_create_augroup("MyTexGroup", { clear = true })
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = "tex",
+  group = optional_group,
+  command = "TSBufDisable highlight",
+})
 
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = "tex",
+  group = optional_group,
+  command = "TSBufDisable highlight",
+})
