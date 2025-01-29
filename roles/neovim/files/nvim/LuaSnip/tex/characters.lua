@@ -14,8 +14,17 @@ s({trig=";a", snippetType="autosnippet"},
 s({trig=";b", snippetType="autosnippet"},
   {t("\\beta"),}
 ),
+s({trig=";e", snippetType="autosnippet"},
+  {t("\\epsilon"),}
+),
+s({trig=";E", snippetType="autosnippet"},
+  {t("\\Epsilon"),}
+),
 s({trig=";g", snippetType="autosnippet"},
   {t("\\gamma"),}
+),
+s({trig=";G", snippetType="autosnippet"},
+  {t("\\Gamma"),}
 ),
 s({trig=";p", snippetType="autosnippet"},
   {t("\\phi"),}
@@ -38,4 +47,14 @@ s({trig=";O", snippetType="autosnippet"},
 s({trig=";;d", snippetType="autosnippet"},
   {t("\\cdot"),}
 ),
+s({trig=";;p", snippetType="autosnippet"},
+  {t("\\partial"),}
+),
+s({trig=";r", snippetType="autosnippet"},
+  {t("\\mathbb{R}"),}
+),
+s({trig=";n", snippetType="autosnippet"},
+  {t("\\mathbb{R}^n"),}
+),
+
 }

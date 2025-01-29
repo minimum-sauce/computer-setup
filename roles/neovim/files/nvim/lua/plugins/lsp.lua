@@ -184,6 +184,8 @@ return { -- LSP Configuration & Plugins
     require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
     require("mason-lspconfig").setup({
+      ensure_installed = {},
+      automatic_installation = true,
       -- ensure_installed = true,
       -- automatic_installation = true,
       handlers = {

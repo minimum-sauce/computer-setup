@@ -15,6 +15,20 @@ s({trig="ali", dscr="Creates Align environment"},
   \end{align}
   ]],{i(1)}
 )),
+s({trig="item", dscr="Creates Itemize environment"},
+  fmta([[
+  \begin{itemize}
+    \item <>
+  \end{itemize}
+  ]],{i(1)}
+)),
+s({trig="enum", dscr="Creates Itemize environment"},
+  fmta([[
+  \begin{enumerate}
+    \item <>
+  \end{enumerate}
+  ]],{i(1)}
+)),
 -- General Environment
 s({trig="env"},
   fmta(

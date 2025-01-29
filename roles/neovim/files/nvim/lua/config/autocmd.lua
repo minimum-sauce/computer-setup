@@ -11,15 +11,23 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
-local optional_group = vim.api.nvim_create_augroup("MyTexGroup", { clear = true })
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = "tex",
-  group = optional_group,
-  command = "TSBufDisable highlight",
-})
 
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = "tex",
-  group = optional_group,
-  command = "TSBufDisable highlight",
+vim.api.nvim_create_autocmd('FileType', {
+	desc = 'Automatically activate Quarto when entering markdown buffer',
+
+	group = vim.api.nvim_create_augroup('start_quarto', { clear = true }),
+  pattern = "markdown",
+	callback = function (opts)
+			require("quarto").activate()
+	end
 })
+  
+-- Automatically start VimTeX compilation on file save
+-- local group = vim.api.nvim_create_augroup("VimtexAutoCompile", { clear = true })
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+-- pattern = "*.tex",
+-- group = group,
+-- callback = function()
+-- vim.cmd("VimtexCompile")
+-- end,
+-- })
