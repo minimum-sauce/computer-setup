@@ -16,6 +16,7 @@
       - ssh
       - python3-pip
       - fuse
+      - net-tools
       #      - sshpass
     state: present
   become: true

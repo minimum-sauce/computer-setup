@@ -11,10 +11,13 @@ alias y3='cd ~/Documents/school/year3'
 
 # nvim shortcuts
 alias v='nvim'
-alias nrc='nvim ~/.config/nvim/'
+alias nrc='cd ~/.config/nvim/'
 alias zrc='nvim $HOME/.zshrc'
 alias myzsh='nvim $ZSH'
 alias zsource='source $HOME/.zshrc'
 
 # Python 
 alias python='python3'
+
+# Matlab
+alias mlab='/usr/local/MATLAB/R2024b/bin/matlab -softwareopengl'

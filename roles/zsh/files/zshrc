@@ -8,8 +8,8 @@ export MANPATH="/usr/local/man:$MANPATH"
 
 # If you come from bash you might have to change your $PATH.
 export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH"
-export PATH="$HOME/.local/pipx/venvs/ansible/bin:$HOME/.local/share/zig-linux-x86_64-0.12.0/:$PATH"
-export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python3/dist-packages/:/usr/local/lib/python3.10/site-packages/:/usr/local/lib/python3.10/dist-packages/:/usr/lib/python3/dist-packages/:$HOME/.local/lib/python3.10/site-packages/:"
+export PATH="$HOME/.local/pipx/venvs/ansible/bin:$PATH"
+#export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python3/dist-packages/:/usr/local/lib/python3.10/site-packages/:/usr/local/lib/python3.10/dist-packages/:/usr/lib/python3/dist-packages/:$HOME/.local/lib/python3.10/site-packages/:"
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.config/zsh/oh-my-zsh"
@@ -19,6 +19,9 @@ export ZSH_CUSTOM="$HOME/.config/zsh/custom"
 
 # Theme to load 
 ZSH_THEME="robbyrussell"
+
+# Path to zig executable
+export PATH="$PATH:$HOME/.local/zig-0.14.0/"
 
 # Candidate themes if ZSH_THEME is "random"
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
@@ -83,8 +86,62 @@ export ARCHFLAGS="-arch x86_64"
 plugins=(git)
 
 
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PKG_CONFIG_PATH="/usr/local/lib/x86_64-linux-gnu/pkgconfig"
+
+# include following in .bashrc / .bash_profile / .zshrc
+# usage
+# $ mkvenv myvirtualenv # creates venv under ~/.virtualenvs/
+# $ venv myvirtualenv   # activates venv
+# $ deactivate          # deactivates venv
+# $ rmvenv myvirtualenv # removes venv
+
+export VENV_HOME="$HOME/.virtualenvs"
+[[ -d $VENV_HOME ]] || mkdir $VENV_HOME
+
+lsvenv() {
+  ls -1 $VENV_HOME
+}
+
+venv() {
+  if [ $# -eq 0 ]
+    then
+      echo "Please provide venv name"
+    else
+      source "$VENV_HOME/$1/bin/activate"
+  fi
+}
+
+mkvenv() {
+  if [ $# -eq 0 ]
+    then
+      echo "Please provide venv name"
+    else
+      python3 -m venv $VENV_HOME/$1
+  fi
+}
+
+rmvenv() {
+  if [ $# -eq 0 ]
+    then
+      echo "Please provide venv name"
+    else
+      rm -r $VENV_HOME/$1
+  fi
+}
+
+# Set Matlab work folder for school
+export MATLAB_USE_USERWORK=1
+
+
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+[[ ! -r '/home/felix/.opam/opam-init/init.zsh' ]] || source '/home/felix/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
+# END opam configuration

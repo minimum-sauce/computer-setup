@@ -73,7 +73,7 @@ return {
 			closePreviewOnExit = true,
 			lspFeatures = {
 				enabled = true,
-				chunks = "curly",
+				chunks = "all",
 				languages = { "r", "python", "html" }, -- "julia", "bash",
 				diagnostics = {
 					enabled = true,
@@ -157,6 +157,7 @@ return {
 					},
 				},
 			})
+			vim.g.jupytext_fmt = "light"
 		end,
 	},
 }

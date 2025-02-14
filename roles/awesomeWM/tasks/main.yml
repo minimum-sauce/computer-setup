@@ -1,0 +1,44 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for awesomeWM
+
+# ------------------------------------------------------------------ #
+# Install AwsomeWM
+# ------------------------------------------------------------------ #
+
+- name: Install Awsome tiling window manager
+  ansible.builtin.apt:
+    pkg: 
+    - awesome
+    - nitrogen # For Wallpaper
+    - rofi # For starting applications
+    state: present
+  become: true
+
+# ------------------------------------------------------------------ #
+# Setup config
+# ------------------------------------------------------------------ #
+
+- name: Make sure .config/ exists
+  ansible.builtin.file:
+    name: "~/.config/"
+    state: directory
+
+- name: check if config file for awesome already exists
+  ansible.builtin.stat: 
+    path: "{{ awesome_config_dest_path }}"
+  register: awesome_config
+
+- name: Remove config if not symbolic link
+  ansible.builtin.file:
+    path: "{{ awesome_config_dest_path }}"
+    state: absent
+  when: not (awesome_config.stat.islnk is defined and awesome_config.stat.islnk)
+
+- name: Add config file for AwesomeWM
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/awesome"
+    dest: "{{ awesome_config_dest_path }}"
+    state: link
+    force: yes
+  when: not (awesome_config.stat.islnk is defined and awesome_config.stat.islnk)

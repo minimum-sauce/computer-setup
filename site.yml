@@ -34,3 +34,6 @@
     - role: swayWM
       tags: sway
 
+    - role: awesomeWM
+      tags: awesome
+

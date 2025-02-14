@@ -115,11 +115,25 @@ if (answer == "y" or answer == "yes"):
 # Setting up SwayWM                                 #
 # ------------------------------------------------- #
 
-prompt = "Would you like to setup Sway tiling window manager [y/N]?"
+prompt = "Would you like to setup a tiling window manager [y/N]? "
 answer = str.lower(input(prompt))
 
 if (answer == "y" or answer == "yes"):
-    tags.append("sway")
+    prompt = """please choose either SwayWM or AwesomeWM as your TWM
+    \tSway    - (1) (NOTE: currently not functional),
+    \tAwesome - (2):
+    """
+    shell = str.lower(input(prompt))
+
+    while (shell != "1" and shell != "2"):
+        print("'" + shell + "' is an invalid choice. please choose one of the available alternatives (1 or 2)\n\n")
+        shell = str.lower(input(prompt))
+
+    if (shell == "1"):
+        pass
+        #tags.append("sway") #NOTE: 
+    else:
+        tags.append("awesome")
 
 # ------------------------------------------------- #
 # Run ansible with setup                            #
